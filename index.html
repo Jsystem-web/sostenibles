@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones sostenibles</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #2ecc71;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .project-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .project-details {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .project-details h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .project-details h3 {
+            color: var(--dark-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        .project-details ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact {
+            background-color: var(--light-color);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"> Ciudades sostenibles </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#proyectos">Soluciones</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>UN PASO A LAS CIUDADES SOSTENIBLES</h1>
+        <p>Fortaleciendo la protección del medio ambiente, equilibrando el desarrollo económico e inclusión social. con un modelo de vida sin comprometer las generaciones futuras..</p>
+    </section>
+
+    <section id="proyectos" class="container">
+        <h2 class="section-title">Nuestras Soluciones</h2>
+        
+        <div class="projects">
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="images/medidor.png?auto=format&fit=crop&w=600&q=80" alt="Medidores Inteligentes">
+                </div>
+                <div class="project-content">
+                    <h3>Medidores Inteligentes</h3>
+                    <p>Tecnología IoT para la gestión inteligente del agua con sistemas prepago y monitoreo en tiempo real.</p>
+                    <a href="#medidores" class="btn">Ver Detalles</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="images/Biochar.jpg?auto=format&fit=crop&w=600&q=80" alt="Proyecto Biochar">
+                </div>
+                <div class="project-content">
+                    <h3>Fábrica de Biochar</h3>
+                    <p>Implementación de planta para procesar residuos orgánicos y producir biochar.</p>
+                    <a href="#biochar" class="btn">Ver Detalles</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="images/solar_0.png?auto=format&fit=crop&w=600&q=80" alt="Energía Fotovoltaica">
+                </div>
+                <div class="project-content">
+                    <h3>Generación de Energía Fotovoltaica</h3>
+                    <p>Soluciones de sistemas fotovoltaicos para edificaciones públicas y privadas.</p>
+                    <a href="#fotovoltaica" class="btn">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="medidores" class="project-details">
+            <h2>Medidores Inteligentes</h2>
+            <img src="images/medidor_5.png?auto=format&fit=crop&w=600&q=80" alt="Sistema de medidores inteligentes" class="detail-img">
+            
+            <p> Tecnología para la gestión inteligente del agua con sistemas prepago y monitoreo en tiempo real, permitiendo un servicio personalizado y óptimo con almacenamiento de datos de fácil lectura (10 años) y fácil transferencia de datos entre medidores.</p>
+            
+            <h3>Beneficios</h3>
+            <ul>
+                <li>Reducción de pérdidas o fugas del recurso</li>
+                <li>Eliminación de cartera vencida</li>
+                <li>Pago del servicio anticipadamente</li>
+                <li>Eliminación de costes de lectura, corte y reconexión</li>
+                <li>Sistema de multitarifa</li>
+                <li>No se requiere infraestructura para comunicación</li>
+            </ul>
+            <h3>Detalles Técnicos</h3>
+            <ul>
+                <li>Aprovecha infraestructura de operadoras celulares</li>
+                <li>Encriptación alta de información</li>
+                <li>Bajo mantenimiento y costos operativos</li>
+                <li>Batería con vida útil superior a 5 años</li>
+                <li>Monitoreo en tiempo real</li>
+            </ul>
+            <div class="gallery">
+                <img src="images/medidor_0.jpg?auto=format&fit=crop&w=600&q=80" alt="Tarjeta ">
+                <img src="images/medidor_2.png?auto=format&fit=crop&w=600&q=80" alt="Lector de tarjetas">
+                <img src="images/medidor_3.png?auto=format&fit=crop&w=600&q=80" alt="Software de gestión">
+            </div>
+            
+            <h3>Tecnología de punta IoT</h3>
+            <p>La forma más efectiva de comunicación entre equipos hoy en día, amigable con el medio ambiente y con las empresas proveedoras de servicios públicos.</p>
+            <ul>
+                <li>Cobertura amplia incluso en subterráneos</li>
+                <li>Bajo costo de implementación y mantenimiento</li>
+                <li>Fácil configuración</li>
+                <li>Alta seguridad en las lecturas y transmisión de datos</li>
+            </ul>
+        </div>
+        
+        <div id="biochar" class="project-details">
+            <h2>Fábrica de Biochar</h2>
+            <img src="images/material_0.png?auto=format&fit=crop&w=600&q=80" alt="Proceso de biochar" class="detail-img">
+            
+             <h3>Biochar</h3>
+            <p> Recuperación del ecosistemas mediante producción de biochar.</p>
+            
+            <div class="gallery">
+                <img src="images/material_1.jpg?auto=format&fit=crop&w=600&q=80" alt="Laguna contaminada">
+                <img src="images/material_2.png?auto=format&fit=crop&w=600&q=80" alt="Residuos orgánicos">
+                <img src="images/material_3.png?auto=format&fit=crop&w=600&q=80" alt="Proceso de pirólisis">
+            </div>
+            
+            <h3>Objetivos</h3>
+            <p><strong>Objetivo General:</strong> Implementar una planta de biochar que aproveche los residuos orgánicos para reducir la contaminación, recuperar el ecosistema y generar beneficios productivos para la comunidad.</p>
+            
+            <p><strong>Objetivos Específicos:</strong></p>
+            <ul>
+                <li>Reducir la acumulación de residuos orgánicos en la lagunas</li>
+                <li>Instalar y operar una planta de pirólisis con tecnología adecuada</li>
+                <li>Producir biochar como enmienda agrícola y generar ingresos sostenibles</li>
+                <li>Involucrar a comerciantes, pescadores y agricultores en gestión de residuos</li>
+                <li>Fortalecer la gobernanza ambiental mediante cooperación interinstitucional</li>
+            </ul>
+            
+            <h3>Beneficios Clave</h3>
+            <ul>
+                <li>Ambientales: reducción del 30% de residuos orgánicos en 2 años</li>
+                <li>Económicos: producción anual de 150 t de biochar</li>
+                <li>Sociales: 200 personas capacitadas en gestión de residuos</li>
+                <li>Turísticos: recuperación de lugares turisticos como destino sostenible</li>
+            </ul><h3>Detalles Técnicos</h3>
+            <ul>
+                <li>Invervion : desde USD 195.000 </li>
+                <li>Capacidad:  150 t/ año de biochar procesada </li>
+                <li>Implementación: 12 meses</li>
+                <li>beneficiarios Directos:Comerciantes, Pescadores, Agricultores</li>
+            </ul>
+            
+            
+        </div>
+        
+        <div id="fotovoltaica" class="project-details">
+            <h2>Generación de Energía Fotovoltaica</h2>
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Paneles solares" class="detail-img">
+            
+            <p><strong>Ámbito territorial:</strong> Zona urbana y rurales </p>
+            <p><strong>Horizonte del proyecto:</strong> 12 meses (diseño, implementación y consolidación ), con vida útil técnica ≥ 25 años</p>
+            
+            <div class="gallery">
+                <img src="images/solar_1.jpg?auto=format&fit=crop&w=600&q=80" alt="Instalación solar">
+                <img src="images/solar_2.png?auto=format&fit=crop&w=600&q=80" alt="Paneles solares en edificio">
+                <img src="images/solar_3.jpg?auto=format&fit=crop&w=600&q=80" alt="Energía renovable">
+            </div>
+            
+            <h3>Resumen ejecutivo</h3>
+            <p>El proyecto propone instalar sistemas fotovoltaicos conectados a red (on-grid) y, donde sea pertinente, híbridos con almacenamiento en edificaciones públicas y privadas, además de iluminación pública solar en parques seleccionados.</p>
+            <p>Se prevé una potencia total objetivo de <strong>30 MWp</strong> en tres fases (piloto, expansión y consolidación).</p>
+            
+            <h3>Resultados esperados</h3>
+            <ul>
+                <li>Reducción del consumo de red en instalaciones municipales ≥ 45%</li>
+                <li>Ahorro estimado en la factura eléctrica ≥ 30–40% según sitio</li>
+                <li>Emisiones evitadas: ≈ 900–1.100 tCO₂e en 25 años</li>
+                <li>Implementación de un laboratorio vivo para educación técnica y ciudadanía</li>
+            </ul>
+            
+            <h3>Presupuesto referencial</h3>
+            <p>USD 1,10–1,40 millones (CAPEx total para 1,2 MWp)</p>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-info">
+                <p>CIUDADES SOSTENIBLES</p>
+                <p>Teléfono: +593 990824540</p>
+                <p>Email: jsystem_ltd@hotmail.com</p>
+            </div>
+            <div id="qr-code" style="position:fixed; right:10px; bottom:70px; text-align:center; z-index: 1000;">
+    <img src="images/qr-code.png" width="100" height="100" alt="Código QR">
+</div>
+
+<div id="whatsapp-icon" style="position:fixed; right:10px; bottom:10px; text-align:center; padding:3px; z-index: 1000;">
+    <a href="https://api.whatsapp.com/send?phone=593990824540" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/240px-WhatsApp.svg.png" width="50" height="50" alt="WhatsApp">
+    </a>
+</div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Jsystem_ltd-web</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
